@@ -13,13 +13,15 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - chmod +x ./gradlew
-      - echo unit testing ...
-      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE} ./gradlew test
-      - echo make jar ...
-      - ./gradlew assemble
+#      - chmod +x ./gradlew
+#      - echo unit testing ...
+#      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE} ./gradlew test
+#      - echo make jar ...
+#      - ./gradlew assemble
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo $REPOSITORY_URI
+      - echo This is your repo uri
       - docker build --build-arg JAR_FILE=build/libs/*.jar -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
@@ -31,9 +33,6 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"order-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
-cache:
-  paths:
-    - '/root/.gradle/**/*'
 
 artifacts:
   files:
