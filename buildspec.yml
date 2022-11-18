@@ -2,9 +2,12 @@ version: 0.2
 
 
 phases:
+  env:
+    variables:
+      SPRING_PROFILE: "prod"
+
   pre_build:
     commands:
-      - mvn clean install
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
@@ -13,9 +16,14 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
+      - chmod +x ./gradlew
+      - echo unit testing ...
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE} ./gradlew test
+      - echo make jar ...
+      - ./gradlew assemble
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest .
+      - docker build --build-arg JAR_FILE=build/libs/*.jar -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
@@ -26,7 +34,10 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"order-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
+cache:
+  paths:
+    - '/root/.gradle/**/*'
+
 artifacts:
   files:
     - imagedefinitions.json
-    - target/order-service.jar
