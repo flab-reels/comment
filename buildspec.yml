@@ -1,11 +1,8 @@
 version: 0.2
-
-
+env:
+  variables:
+    SPRING_PROFILE: "prod"
 phases:
-  env:
-    variables:
-      SPRING_PROFILE: "prod"
-
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
