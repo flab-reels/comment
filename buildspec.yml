@@ -16,6 +16,7 @@ phases:
 #      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
+      - ls -la
       - echo checking directories
       - mkdir build-output
       - find . -type d -name public -exec cp -R {} build-output \;
@@ -26,9 +27,9 @@ phases:
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - mv build-output/**/* ./
-      - mv build-output/* ./
-      - rm -R build-output *.yml LICENSE README* .git*
+#      - mv build-output/**/* ./
+#      - mv build-output/* ./
+#      - rm -R build-output *.yml LICENSE README* .git*
 #      - echo Build completed on `date`
 #      - echo Pushing the Docker images...
 #      - docker push $REPOSITORY_URI:latest
