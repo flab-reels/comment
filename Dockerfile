@@ -1,5 +1,5 @@
 FROM eclipse-temurin:11-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /app
+COPY ./ ./
+RUN gradle clean build --no-daemon
+ENTRYPOINT ["java", "-jar", "build/libs/*.jar"]
