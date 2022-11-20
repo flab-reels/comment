@@ -19,6 +19,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t no-cache-build .
+      - docker run no-cache-build
   post_build:
     commands:
 #      - mv build-output/**/* ./
