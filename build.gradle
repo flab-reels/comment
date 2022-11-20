@@ -19,10 +19,8 @@ repositories {
 	mavenCentral()
 }
 
-docker {
-	name "${project.name}"
-	copySpec.from(jar).rename(".*","app.jar")
-	buildArgs(['JAR_FILE': "app.jar"])
+jar {
+	enabled = false
 }
 
 dependencies {
