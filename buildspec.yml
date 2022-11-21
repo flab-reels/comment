@@ -1,7 +1,7 @@
 version: 0.2
 env:
   variables:
-    SPRING_PROFILE: "prod"
+    CONTAINER_NAME: "comment"
 phases:
   install:
     runtime-versions:
@@ -26,7 +26,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"order-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files:
