@@ -13,8 +13,13 @@ public class HelloController {
         return "Greetings!";
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/Jose")
     public String hello(@PathVariable String name) {
-        return "Hello " + name;
+        return "What's up " + name;
+    }
+
+    @GetMapping("/Aneesah")
+    public String hello() {
+        return "I love you :3";
     }
 }
