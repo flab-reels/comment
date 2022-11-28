@@ -15,7 +15,7 @@ public class HelloController {
 
     @GetMapping("/Jose")
     public String hello(@PathVariable String name) {
-        return "What's up " + name;
+        return "What's up dude " + name;
     }
 
     @GetMapping("/Aneesah")
