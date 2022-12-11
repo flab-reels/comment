@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping
     public String welcome() {
-        return "Greetings New Pipeline!";
+        return "Greetings New Pipeline! new image tag";
     }
 
     @GetMapping("/Jose")
