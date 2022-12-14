@@ -10,7 +10,7 @@ phases:
       nodejs: latest
       java : corretto11
     commands:
-      - yum install -y jq
+#      - yum install -y jq
       - npm install -g npm@latest
 
   pre_build:
