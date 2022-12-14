@@ -10,8 +10,8 @@ phases:
       nodejs: latest
       java : corretto11
     commands:
-#      - yum install -y jq
-#      - npm install -g npm@latest
+      - yum install -y jq
+      - npm install -g npm@latest
 
   pre_build:
     commands:
@@ -43,21 +43,16 @@ phases:
 #      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
 #      - docker push $ECR_REPO:$IMAGE_TAG
 #
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
+      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
       - cd infra
       - mkdir build
       - npm ci
       - node produce-config.js -s SampleCIPipelineStack
-  post_build:
-    commands:
-      - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      #      # Save the Docker image digest
-      #      - IMAGE_URI=`docker inspect --format='{{index .RepoDigests 0}}' $ECR_REPO:$IMAGE_TAG`
-      - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
-      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
-
 artifacts:
   files :
 #    # This will be used for codedeploy

@@ -7,8 +7,8 @@
         "Properties": {
           "TaskDefinition": "<TASK_DEFINITION>",
           "LoadBalancerInfo": {
-            "ContainerName": "sample-web",
-            "ContainerPort": 80
+            "ContainerName": "sample-comment-container",
+            "ContainerPort": 8080
           },
           "PlatformVersion": "LATEST",
           "NetworkConfiguration": {
