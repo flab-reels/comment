@@ -51,6 +51,7 @@ phases:
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
       - cd infra
       - mkdir build
+      - npm i --package-lock-only
       - npm ci
       - node produce-config.js -s SampleCIPipelineStack
 artifacts:
