@@ -1,0 +1,31 @@
+{
+  "family": "sample-comment-backend",
+  "containerDefinitions": [
+    {
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "image": "<PLACEHOLDER>",
+      "essential": true,
+      "name": "sample-web"
+    }
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "taskRoleArn": "PLACEHOLDER_TASK_ROLE",
+  "executionRoleArn": "PLACEHOLDER_EXECUTION_ROLE",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "tags": [
+    {
+      "key": "project",
+      "value": "sample-backend"
+    }
+  ]
+}

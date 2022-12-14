@@ -43,30 +43,30 @@ phases:
 #      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
 #      - docker push $ECR_REPO:$IMAGE_TAG
 #
-#      # Save the Docker image digest
-#      - IMAGE_URI=`docker inspect --format='{{index .RepoDigests 0}}' $ECR_REPO:$IMAGE_TAG`
-#      - echo Built image $IMAGE_URI, pushed with tag $IMAGE_TAG
-#      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
-#      - cd infra
-#      - mkdir build
-#      - npm ci
-#      - node produce-config.js -g test -s TriviaBackendTest -h TriviaBackendHooksTest
-#      - node produce-config.js -g prod -s TriviaBackendProd -h TriviaBackendHooksProd
+      - cd infra
+      - mkdir build
+      - npm ci
+      - node produce-config.js -s SampleCIPipelineStack
   post_build:
     commands:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      #      # Save the Docker image digest
+      #      - IMAGE_URI=`docker inspect --format='{{index .RepoDigests 0}}' $ECR_REPO:$IMAGE_TAG`
+      - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
+      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
 artifacts:
+  files :
+#    # This will be used for codedeploy
+#    - imageDetail.json
   secondary-artifacts:
     BuildArtifact:
       files:
-        - /infra/build/appspec-prod.json
-        - /infra/build/appspec-test.json
-        - /infra/build/task-definition-test.json
-        - /infra/build/task-definition-prod.json
+        - /infra/build/appspec-sample.json
+        - /infra/build/task-definition-sample.json
       discard-paths: yes
     ImageDetails:
       files:

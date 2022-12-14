@@ -7,7 +7,7 @@
         "Properties": {
           "TaskDefinition": "<TASK_DEFINITION>",
           "LoadBalancerInfo": {
-            "ContainerName": "web",
+            "ContainerName": "sample-web",
             "ContainerPort": 80
           },
           "PlatformVersion": "LATEST",
