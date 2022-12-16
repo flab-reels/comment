@@ -43,14 +43,14 @@ phases:
 
   build:
     commands:
-#      - ./gradlew bootBuildImage --imageName=$REPOSITORY_URI:$IMAGE_TAG
-#      - export imageTag=$IMAGE_TAG
-#      - echo imageTag=$IMAGE_TAG
-#
-#      - echo Pushing the Docker image...
-#      - docker push $REPOSITORY_URI:$IMAGE_TAG
-#      - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
-#      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
+      - ./gradlew bootBuildImage --imageName=$REPOSITORY_URI:$IMAGE_TAG
+      - export imageTag=$IMAGE_TAG
+      - echo imageTag=$IMAGE_TAG
+
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
+      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
       - cd infra
@@ -71,7 +71,7 @@ artifacts:
         - infra/build/appspec-sample.json
         - infra/build/task-definition-sample.json
       discard-paths: yes
-#    ImageDetails:
-#      files:
-#        - /imageDetail.json
-#      discard-paths: yes
+    ImageDetails:
+      files:
+        - imageDetail.json
+      discard-paths: yes
