@@ -68,8 +68,8 @@ artifacts:
   secondary-artifacts:
     BuildArtifact:
       files:
-        - /infra/build/appspec-sample.json
-        - /infra/build/task-definition-sample.json
+        - infra/build/appspec-sample.json
+        - infra/build/task-definition-sample.json
       discard-paths: yes
 #    ImageDetails:
 #      files:
