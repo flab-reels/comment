@@ -48,7 +48,7 @@ phases:
       - ls
       - cd infra
       - mkdir build
-      - npm install aws-cdk
+      - npm install aws-sdk
       - npm install yargs
       - node produce-config.js -s SampleCIPipelineStack
 artifacts:
