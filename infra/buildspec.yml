@@ -55,6 +55,11 @@ phases:
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
       - cd infra
       - node produce-config.js -s SampleCIPipelineStack
+      - cd build
+      - cd ..
+      - pwd
+      - cd ..
+      - pwd
 artifacts:
   files :
 #    # This will be used for codedeploy
