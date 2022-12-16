@@ -53,6 +53,7 @@ phases:
 #      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
+      - cd infra
       - node produce-config.js -s SampleCIPipelineStack
 artifacts:
   files :
