@@ -12,6 +12,13 @@ phases:
       java : corretto11
     commands:
 #      - yum install -y jq
+      - cd infra
+      - mkdir build
+      - npm install aws-sdk
+      - npm install yargs
+      - ls
+      - cd ..
+      - pwd
 
   pre_build:
     commands:
@@ -45,11 +52,6 @@ phases:
 #      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
-      - ls
-      - cd infra
-      - mkdir build
-      - npm install aws-sdk
-      - npm install yargs
       - node produce-config.js -s SampleCIPipelineStack
 artifacts:
   files :
