@@ -77,7 +77,7 @@ async function produceConfigs() {
     // Write out appspec
     appSpec.Resources[0].TargetService.Properties.NetworkConfiguration.awsvpcConfiguration.subnets = privateSubnets;
     appSpec.Resources[0].TargetService.Properties.NetworkConfiguration.awsvpcConfiguration.securityGroups = serviceSecurityGroups;
-    appSpec.Hooks[0].AfterAllowTestTraffic = preTrafficHook;
+    //appSpec.Hooks[0].AfterAllowTestTraffic = preTrafficHook;
     fs.writeFileSync(`./build/appspec-sample.json`, JSON.stringify(appSpec, null, 2) , 'utf-8');
 }
 

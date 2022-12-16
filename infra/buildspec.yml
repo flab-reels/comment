@@ -48,11 +48,8 @@ phases:
       - ls
       - cd infra
       - mkdir build
-      - npm install
-      - npm install -g aws-cdk
-      - npm init
-      - ls
-      - npm ci
+      - npm install aws-cdk
+      - npm install yargs
       - node produce-config.js -s SampleCIPipelineStack
 artifacts:
   files :
@@ -64,7 +61,7 @@ artifacts:
         - /infra/build/appspec-sample.json
         - /infra/build/task-definition-sample.json
       discard-paths: yes
-    ImageDetails:
-      files:
-        - /imageDetail.json
-      discard-paths: yes
+#    ImageDetails:
+#      files:
+#        - /imageDetail.json
+#      discard-paths: yes
