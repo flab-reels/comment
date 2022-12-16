@@ -14,7 +14,7 @@ phases:
 #      - yum install -y jq
       - cd infra
       - mkdir build
-      - npm init
+      - npm init --force --yes
       - npm install aws-sdk
       - npm install yargs
       - ls
