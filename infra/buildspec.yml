@@ -50,7 +50,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Built image $REPOSITORY_URI, pushed with tag $IMAGE_TAG
-      - echo "{\"ImageURI\":\"$IMAGE_URI\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
+      - echo "{\"ImageURI\":\"$REPOSITORY_URI:$IMAGE_TAG\"}" > imageDetail.json #  use definitions files to map the image URI and container name to the task definition
 
       # Generate appspec and task definition files (filling in subnet IDs, security group IDs, etc)
       - cd infra
