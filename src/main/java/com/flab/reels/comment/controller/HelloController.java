@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping
     public String welcome() {
-        return "Greetings New Pipeline! Green Task!";
+        return "Greetings New Pipeline! Blue Task!";
     }
 
     @GetMapping("/Jose")
